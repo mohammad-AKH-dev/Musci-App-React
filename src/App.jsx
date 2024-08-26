@@ -9,10 +9,53 @@ function App() {
   const [play, setPlay] = useState(false);
   const [changeSong,setChangeSong] = useState(null)
   const [icon,setIcon] = useState(false)
+  const [second,setSeconds] = useState(0)
+  const [minute,setMinute] = useState(0)
+  const [durationSec,setDurationSec] = useState(0)
+  const [durationMinute,setDurationMinute] = useState(0)
   // const [currentTime,setCurrentTime] = useState(0)
 
-  console.log(audioRef.current.currentTime)
 
+  // ===========timeline handler
+  const handleLoadData = ()=> {
+    if(audioRef.current){
+      setDurationSec(Math.floor(audioRef.current.duration % 60))
+      setDurationMinute(Math.floor(audioRef.current.duration / 60))
+    }
+  }
+
+   useEffect(()=> {
+     if(audioRef.current){
+     
+      setInterval(()=> {
+         setSeconds(Math.floor(audioRef.current.currentTime))
+        },1000)
+     }
+   },[second])
+
+
+   useEffect(()=> {
+    let hour = (Math.floor(audioRef.current.currentTime / 3600))
+
+    let min = Math.floor((audioRef.current.currentTime - (hour * 3600)) / 60)
+
+    
+        if(second > 59){
+          setSeconds(prevState => prevState - 60)
+        }
+        setMinute(min)
+   },[second])
+
+
+   function timeHandler(target){
+    let value = target
+    audioRef.current.currentTime = value
+   }
+
+   
+
+
+  //  ==========prev song handler
   function prevHandler(){
     if(index > 0){
       setIndex(prevIndex => prevIndex - 1)
@@ -23,7 +66,8 @@ function App() {
     setPlay(true)
     setChangeSong(!changeSong)
   }
-
+  
+  // ==========next song handler
   function nextHandler(){
     if(index < songs.length - 1){
       setIndex(prevIndex => prevIndex + 1)
@@ -34,7 +78,8 @@ function App() {
     setPlay(true)
     setChangeSong(!changeSong)
   }
-
+  
+  // ==========play handler
   function playSong (){
     if (play) {
       audioRef.current.play();
@@ -43,14 +88,10 @@ function App() {
       audioRef.current.pause()
     }
   }
-
+   
   useEffect(() => {
    playSong()
   }, [play]);
-
-  // useEffect(()=> {
-  //   setPlay(false)
-  // },[])
 
   useEffect(()=> {
     if(!changeSong || changeSong){
@@ -67,11 +108,17 @@ function App() {
             className="music-app__Img"
           />
         </div>
-
+          <div></div>
         <div className="music-app__infos">
+          <div className="timeline-wrapper">
+            <div className="time-start">
+            <span className="start">{minute < 10 ? `0${minute}`: minute}:{second < 10 ? `0${second}`: second}</span>
+            </div>
+            <input className="music-range__input" type='range' value={audioRef?.current?.currentTime} min={0} max={audioRef?.current?.duration} step={0.05}  onChange={(event)=> timeHandler(event.target.value)}/>
+            <span className="end">{durationMinute < 10 ? `0${durationMinute}` : durationMinute}:{durationSec < 10 ? `0${durationSec}` : durationSec}</span>
+          </div>
           <div className="music-app-infos__wrapper">
-            <input type='range' min={0} />
-            <audio src={songs[index].path} ref={audioRef}></audio>
+            <audio src={songs[index].path} ref={audioRef} onLoadedMetadata={()=> handleLoadData()}></audio>
 
             <div className="prev-btn" onClick={()=> prevHandler()}>
               <svg
