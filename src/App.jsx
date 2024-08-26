@@ -4,6 +4,7 @@ import Songs from "./datas";
 
 function App() {
   const audioRef = useRef(null);
+  const wrapperRef = useRef(null)
   const [songs, setSongs] = useState(Songs);
   const [index, setIndex] = useState(0);
   const [play, setPlay] = useState(false);
@@ -13,6 +14,7 @@ function App() {
   const [minute,setMinute] = useState(0)
   const [durationSec,setDurationSec] = useState(0)
   const [durationMinute,setDurationMinute] = useState(0)
+  const [bgImage,setBmImage] = useState((''))
   // const [currentTime,setCurrentTime] = useState(0)
 
 
@@ -22,6 +24,24 @@ function App() {
       setDurationSec(Math.floor(audioRef.current.duration % 60))
       setDurationMinute(Math.floor(audioRef.current.duration / 60))
     }
+  }
+
+  // ============background handler
+  useEffect(()=> {
+       setBmImage(songs[index].cover)
+  },[index])
+
+  const wrapperStyle = {
+    position: 'absolute',
+    inset: '0',
+    width: '100%',
+    height: '100%',
+    backgroundImage: `url(${bgImage})`,
+    backgroundRepeat: 'no-repeat',
+    backgroundSize: 'cover',
+    backgroundPosition:'50%',
+    backdropFilter: 'blur(5px)',
+
   }
 
    useEffect(()=> {
@@ -100,6 +120,8 @@ function App() {
   },[changeSong])
 
   return (
+    <div style={wrapperStyle} ref={wrapperRef}>
+    <div className="app-wrapper">
     <div className="music-app">
       <div className="music-app__wrapper">
         <div className="music-app-img__wrapper">
@@ -125,7 +147,7 @@ function App() {
                 xmlns="http://www.w3.org/2000/svg"
                 width="100%"
                 height="100%"
-                fill="currentColor"
+                fill="#fff"
                 className="bi bi-chevron-double-left"
                 viewBox="0 0 16 16"
               >
@@ -149,7 +171,7 @@ function App() {
                xmlns="http://www.w3.org/2000/svg"
                width="100%"
                height="100%"
-               fill="currentColor"
+               fill="#fff"
                className="bi bi-play-circle-fill"
                viewBox="0 0 16 16"
              >
@@ -165,7 +187,7 @@ function App() {
                   xmlns="http://www.w3.org/2000/svg"
                   width="100%"
                   height="100%"
-                  fill="currentColor"
+                  fill="#fff"
                   className="bi bi-pause-circle-fill"
                   viewBox="0 0 16 16"
                 >
@@ -179,7 +201,7 @@ function App() {
                 xmlns="http://www.w3.org/2000/svg"
                 width="100%"
                 height="100%"
-                fill="currentColor"
+                fill="#fff"
                 className="bi bi-chevron-double-right"
                 viewBox="0 0 16 16"
               >
@@ -196,6 +218,8 @@ function App() {
           </div>
         </div>
       </div>
+    </div>
+    </div>
     </div>
   );
 }
