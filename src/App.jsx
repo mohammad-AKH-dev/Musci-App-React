@@ -49,6 +49,7 @@ function App() {
      
       setInterval(()=> {
          setSeconds(Math.floor(audioRef.current.currentTime))
+         setMainTime(minute)
         },1000)
      }
    },[second])
@@ -63,6 +64,7 @@ function App() {
         if(second > 59){
           setSeconds(prevState => prevState - 60)
         }
+
         setMinute(min)
    },[second])
 
@@ -132,6 +134,10 @@ function App() {
         </div>
           <div></div>
         <div className="music-app__infos">
+          <div className="music-app_song">
+            <h1 className="music-app__name">{songs[index].name}</h1>
+            <span className="music-app__singer">{songs[index].singer}</span>
+          </div>
           <div className="timeline-wrapper">
             <div className="time-start">
             <span className="start">{minute < 10 ? `0${minute}`: minute}:{second < 10 ? `0${second}`: second}</span>

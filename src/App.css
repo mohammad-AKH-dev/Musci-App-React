@@ -67,6 +67,18 @@ body{
    margin-bottom: 1rem;
 }
 
+.music-app_song{
+  text-align: center;
+  margin-top: -8rem;
+  padding-bottom: 2rem;
+}
+.music-app__name{
+  font-size: 2rem;
+}
+.music-app__singer{
+  font-size: 1.2rem;
+}
+
 @keyframes rotate {
 
   0%{
