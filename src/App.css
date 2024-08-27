@@ -44,10 +44,10 @@ body{
    color: #817070;
 }
 .music-app-img__wrapper{
-   width: 250px;
-   height: 250px;
+   width: 265px;
+   height: 265px;
    margin: 0 auto;
-   margin-bottom: 12rem;
+   margin-bottom: 11rem;
 }
 .music-app__Img{
    width: 100%;
@@ -86,11 +86,13 @@ body{
 @keyframes rotate {
 
   0%{
-    transform: rotate(360deg) ;
+    transform: scale(1) ;
+    box-shadow: none;
   }
-
+  
   100%{
-    transform: rotate(-360deg) scale(1.1);
+    transform:  scale(0.9);
+    box-shadow: 0 0 15px 10px rgba(255, 255, 255, 0.3);
   }
 
 }
@@ -108,6 +110,7 @@ body{
    width: 100%;
    align-items: center;
    justify-content: space-around;
+   position: relative;
 }
 
 .prev-btn,.next-btn,.play-btn,.pause-btn{
@@ -115,6 +118,24 @@ body{
    width: 30px;
    height: 30px;
    border-radius: 50%;
+}
+
+.fast-forward__next-btn,.fast-forward__prev-btn{
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  cursor: pointer;
+  position: absolute;
+  right: 81px;
+  top: 2px;
+}
+
+.fast-forward__prev-btn svg{
+  transform: rotate(180deg);
+}
+
+.fast-forward__prev-btn{
+  left: 81px !important;
 }
 .next-btn{
 
