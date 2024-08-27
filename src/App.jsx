@@ -159,8 +159,8 @@ function App() {
                   value={audioRef?.current?.currentTime}
                   min={0}
                   max={audioRef?.current?.duration}
-                  step={0.05}
-                  onChange={(event) => timeHandler(event.target.value)}
+                  step={1}
+                  onInput={(event) => timeHandler(event.target.value)}
                 />
                 <span className="end">
                   {durationMinute < 10 ? `0${durationMinute}` : durationMinute}:
