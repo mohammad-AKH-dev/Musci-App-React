@@ -41,7 +41,7 @@ body{
 }
 
 .music-app__wrapper{
-   color: #fff;
+   color: #817070;
 }
 .music-app-img__wrapper{
    width: 250px;
@@ -71,22 +71,26 @@ body{
   text-align: center;
   margin-top: -8rem;
   padding-bottom: 2rem;
+  color:#fff
 }
 .music-app__name{
   font-size: 2rem;
+  white-space: nowrap;
+  color:#fff
 }
 .music-app__singer{
   font-size: 1.2rem;
+  color:#fff
 }
 
 @keyframes rotate {
 
   0%{
-    transform: rotate(360deg);
+    transform: rotate(360deg) ;
   }
 
   100%{
-    transform: rotate(-360deg);
+    transform: rotate(-360deg) scale(1.1);
   }
 
 }

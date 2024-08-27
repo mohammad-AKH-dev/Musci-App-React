@@ -44,7 +44,7 @@ const Songs = [
   {
     name: "Romantic Homicide",
     path: "/songs/Romantic Homicide.mp3",
-    cover: "https://i.ytimg.com/vi/FpO31FVxxb4/hqdefault.jpg",
+    cover: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTQJvnBIQ2Tpp8bUN_1m3HHk8qBcFrbfCdrfg&s",
 singer: 'd4vd'
   },
   {

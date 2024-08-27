@@ -44,30 +44,35 @@ function App() {
 
   }
 
-   useEffect(()=> {
-     if(audioRef.current){
-     
-      setInterval(()=> {
-         setSeconds(Math.floor(audioRef.current.currentTime))
-         setMainTime(minute)
-        },1000)
-     }
-   },[second])
 
+  useEffect(()=> {
+    let myInterVal 
 
-   useEffect(()=> {
+    if(audioRef.current){
+      
+     myInterVal = setInterval(()=> {
+        setSeconds(Math.floor(audioRef.current.currentTime))
+        if(audioRef.current.currentTime === audioRef.current.duration){
+          nextHandler()
+        }
+      },1000)
+    }
+
     let hour = (Math.floor(audioRef.current.currentTime / 3600))
-
+    
     let min = Math.floor((audioRef.current.currentTime - (hour * 3600)) / 60)
 
     
-        if(second > 59){
-          setSeconds(prevState => prevState - 60)
-        }
-
-        setMinute(min)
-   },[second])
-
+    if(second > 59){
+      setSeconds(prevState => prevState - 60)
+      setMinute(min)
+    }
+    
+   
+    
+    return () => clearInterval(myInterVal)
+  },[second])
+  
 
    function timeHandler(target){
     let value = target
@@ -113,7 +118,7 @@ function App() {
    
   useEffect(() => {
    playSong()
-  }, [play]);
+  });
 
   useEffect(()=> {
     if(!changeSong || changeSong){
@@ -153,7 +158,7 @@ function App() {
                 xmlns="http://www.w3.org/2000/svg"
                 width="100%"
                 height="100%"
-                fill="#fff"
+                fill="#817070"
                 className="bi bi-chevron-double-left"
                 viewBox="0 0 16 16"
               >
@@ -177,7 +182,7 @@ function App() {
                xmlns="http://www.w3.org/2000/svg"
                width="100%"
                height="100%"
-               fill="#fff"
+               fill="#817070"
                className="bi bi-play-circle-fill"
                viewBox="0 0 16 16"
              >
@@ -193,7 +198,7 @@ function App() {
                   xmlns="http://www.w3.org/2000/svg"
                   width="100%"
                   height="100%"
-                  fill="#fff"
+                  fill="#817070"
                   className="bi bi-pause-circle-fill"
                   viewBox="0 0 16 16"
                 >
@@ -207,7 +212,7 @@ function App() {
                 xmlns="http://www.w3.org/2000/svg"
                 width="100%"
                 height="100%"
-                fill="#fff"
+                fill="#817070"
                 className="bi bi-chevron-double-right"
                 viewBox="0 0 16 16"
               >
